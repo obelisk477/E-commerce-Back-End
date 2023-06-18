@@ -35,7 +35,7 @@ Tag.belongsToMany(Product, {
     model: ProductTag,
     unique: false
   },
-  as: 'prods_with_shared_attr'
+  as: 'products'
 })
 
 
