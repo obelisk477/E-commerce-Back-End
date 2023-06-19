@@ -6,9 +6,12 @@
 This application serves as the backend of an e-commerce website, offering multiple RESTful API endpoints that allow for CRUD operations on the product database from the front end of the website. Of course, the backend can also be accessed with various API testing platforms such as Insomnia or Postman.
 <br>
 <br>
+
 ## Usage
 
-To use the application, download the code from the repo found at https://github.com/obelisk477/E-commerce-Back-End/. Install the requisie packages & dependencies by using 'npm i' in your terminal. If you haven't initialized the database already, you'll need to navigate to the 'db' directory, login to your MySQL shell, and run the command 'source schema.sql' to create an 'ecommerce_db' database. Then, after exiting the shell and navigating back to the root folder, run 'node seeds' to seed the database with some initial data.
+To use the application, download the code from the repo found at https://github.com/obelisk477/E-commerce-Back-End/. Install the requisie packages & dependencies by using 'npm i' in your terminal. If you haven't initialized the database already, you'll need to navigate to the 'db' directory, login to your MySQL shell, and run the command 'source schema.sql' to create an 'ecommerce_db' database. 
+
+Then, after exiting the shell and navigating back to the root folder, you'll need to copy the text from the '.env.EXAMPLE' file into your own new '.env' file, filling out the username and password information needed to connect to MySQL. Finally, you can run 'node seeds' to seed the database with some initial data.
 
 After that you can start the server by running 'node server'. At this point, you are ready to make API calls to the server via an API testing tool -- though this can also function as a standalone API when connected to the frontend of a website.
 <br>
