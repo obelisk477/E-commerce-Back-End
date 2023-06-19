@@ -4,7 +4,7 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   console.log(`\n${req.method} request recieved from ${req.rawHeaders[3]}\n`)
   try {
     const productData = await Product.findAll({
@@ -15,13 +15,13 @@ router.get('/', async (req, res) => {
   })
     res.status(200).json(productData)
   } catch (err) {
-    res.status(500).json(err)
+    next(err)
   }
 });
 
 
 // find a single product by its `id`
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const singleProdData = await Product.findByPk(req.params.id, {
       include: [
@@ -37,12 +37,12 @@ router.get('/:id', async (req, res) => {
     res.status(200).json(singleProdData)
 
   } catch (err) {
-    res.status(500).json(err)
+    next(err)
   }
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -68,13 +68,13 @@ router.post('/', (req, res) => {
     })
     .then((productTagIds) => res.status(200).json(productTagIds))
     .catch((err) => {
-      console.log(err);
-      res.status(400).json(err);
+      next(err)
+
     });
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
   // update product data
   Product.update(req.body, {
     where: {
@@ -113,12 +113,12 @@ router.put('/:id', (req, res) => {
       return res.json(product);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      next(err)
     });
 });
 
 // delete one product by its `id` value
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const productData = await Product.destroy({
       where: {
@@ -133,7 +133,7 @@ router.delete('/:id', async (req, res) => {
     res.status(200).json(productData)
 
   } catch (err) {
-    res.status(500).json(err)
+      next(err)
   }
 });
 

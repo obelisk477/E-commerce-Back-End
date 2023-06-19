@@ -7,6 +7,10 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use((err, req, res, next) => {
+  console.error(err)
+  res.status(500).send('Internal server error')
+})
 
 app.use(routes);
 
