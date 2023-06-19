@@ -61,12 +61,15 @@ router.post('/', (req, res, next) => {
             tag_id,
           };
         });
-        return ProductTag.bulkCreate(productTagIdArr);
+        console.log(product)
+        ProductTag.bulkCreate(productTagIdArr)
+        return product;
       }
       // if no product tags, just respond
+      console.log(product)
       res.status(200).json(product);
     })
-    .then((productTagIds) => res.status(200).json(productTagIds))
+    .then((product) => res.status(200).json(product))
     .catch((err) => {
       next(err)
 
@@ -83,17 +86,19 @@ router.put('/:id', (req, res, next) => {
   })
     .then((product) => {
       if (req.body.tagIds && req.body.tagIds.length) {
-
+        console.log('hello')
+    
         ProductTag.findAll({
           where: { product_id: req.params.id }
         }).then((productTags) => {
           // create filtered list of new tag_ids
+          console.log("hello2")
           const productTagIds = productTags.map(({ tag_id }) => tag_id);
           const newProductTags = req.body.tagIds
             .filter((tag_id) => !productTagIds.includes(tag_id))
             .map((tag_id) => {
               return {
-                product_id: req.params.id,
+                product_id: Number(req.params.id),
                 tag_id,
               };
             });
@@ -103,6 +108,7 @@ router.put('/:id', (req, res, next) => {
             .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
             .map(({ id }) => id);
           // run both actions
+          console.log(newProductTags)
           return Promise.all([
             ProductTag.destroy({ where: { id: productTagsToRemove } }),
             ProductTag.bulkCreate(newProductTags),

@@ -56,7 +56,7 @@ The endpoints for POST, PUT, and DELETE requests are of course the same as the o
 
 ## Video
 
-A video demonstration of the application's functionality can be found at https://drive.google.com/file/d/1-wytdJn6EsvX931GqZPmA1RO1cnQRzY9/view
+A video demonstration of the application's functionality can be found at https://drive.google.com/file/d/1Zu2Cs4YLo8PmhEeG6tRr4-Fes8fE11gz/view
 
 
 ## License
